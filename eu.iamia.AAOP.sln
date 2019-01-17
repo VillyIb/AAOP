@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eu.iamia.AAOP", "eu.iamia.AAOP\eu.iamia.AAOP.csproj", "{394402DA-1069-4283-B35D-0D257CC3513B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eu.iamia.AAOP.ISP", "eu.iamia.AAOP.ISP\eu.iamia.AAOP.ISP.csproj", "{76020D4D-D2EC-4300-A663-0289287FC5E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eu.iamia.AAOP.CalculationEngine", "eu.iamia.AAOP.CalculationEngine\eu.iamia.AAOP.CalculationEngine.csproj", "{9AB50801-4192-45B5-A173-28056E4C929E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eu.iamia.AAOP.RepositoryFile", "eu.iamia.AAOP.RepositoryFile\eu.iamia.AAOP.RepositoryFile.csproj", "{EF9FE13F-433D-41EC-B65C-C5A61E607E5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eu.iamia.AAOP.CalculationEngine.Test", "eu.iamia.AAOP.CalculationEngine.Test\eu.iamia.AAOP.CalculationEngine.Test.csproj", "{F29184E2-2DFC-4653-9535-023BFBE75AB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +17,22 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{394402DA-1069-4283-B35D-0D257CC3513B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{394402DA-1069-4283-B35D-0D257CC3513B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{394402DA-1069-4283-B35D-0D257CC3513B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{394402DA-1069-4283-B35D-0D257CC3513B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76020D4D-D2EC-4300-A663-0289287FC5E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76020D4D-D2EC-4300-A663-0289287FC5E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76020D4D-D2EC-4300-A663-0289287FC5E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76020D4D-D2EC-4300-A663-0289287FC5E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AB50801-4192-45B5-A173-28056E4C929E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AB50801-4192-45B5-A173-28056E4C929E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AB50801-4192-45B5-A173-28056E4C929E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AB50801-4192-45B5-A173-28056E4C929E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9FE13F-433D-41EC-B65C-C5A61E607E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9FE13F-433D-41EC-B65C-C5A61E607E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9FE13F-433D-41EC-B65C-C5A61E607E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9FE13F-433D-41EC-B65C-C5A61E607E5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F29184E2-2DFC-4653-9535-023BFBE75AB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F29184E2-2DFC-4653-9535-023BFBE75AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F29184E2-2DFC-4653-9535-023BFBE75AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F29184E2-2DFC-4653-9535-023BFBE75AB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
