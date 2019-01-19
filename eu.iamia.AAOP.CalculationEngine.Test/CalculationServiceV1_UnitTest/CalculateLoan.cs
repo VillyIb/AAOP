@@ -73,7 +73,7 @@ namespace eu.iamia.AAOP.CalculationEngine.Test.CalculationServiceV1_UnitTest
                                    Startomkostning = 500m
                                };
 
-            ExpectedValue = new LoanCalculations { ÅOP = 8.701m, Ydelse = 1013.82m, DebitorRente = 0.083m };
+            ExpectedValue = new LoanCalculations { ÅOP = 0.08760m, Ydelse = 1013.82m, DebitorRente = 0.083m };
         }
         //
         // Use TestCleanup to run code after each test has run
@@ -95,17 +95,50 @@ namespace eu.iamia.AAOP.CalculationEngine.Test.CalculationServiceV1_UnitTest
         }
 
         [TestMethod]
-        public void CalculateLoan_Test01()
+        public void CalculateLoan_Ydelse()
         {
             TestTarget.Init(LoanSettings);
 
-            TestTarget.CalculateLoan();
+            TestTarget.CalculateYdelse();
 
             Assert.AreEqual(ExpectedValue.Ydelse, TestTarget.LoanCalculations.Ydelse, "Ydelse");
-            Assert.AreEqual(ExpectedValue.DebitorRente, TestTarget.LoanCalculations.DebitorRente, "DebitorRente");
-            Assert.AreEqual(ExpectedValue.ÅOP, TestTarget.LoanCalculations.ÅOP, "ÅOP");
-
         }
+
+
+        [TestMethod]
+        public void CalculateLoan_DebitorRente()
+        {
+            TestTarget.Init(LoanSettings);
+
+            TestTarget.CalculateDebitorRente();
+
+            Assert.AreEqual(ExpectedValue.DebitorRente, TestTarget.LoanCalculations.DebitorRente, "DebitorRente");
+        }
+
+
+        [TestMethod]
+        public void CalculateLoan_AAOP()
+        {
+            TestTarget.Init(LoanSettings);
+
+            TestTarget.CalculateYdelse();
+            TestTarget.CalculateAAOP();
+
+            Assert.AreEqual(ExpectedValue.ÅOP, TestTarget.LoanCalculations.ÅOP, "ÅOP");
+        }
+
+
+       
+        [TestMethod]
+        public void CalculateLoan_Rente()
+        {
+
+            var rente = TestTarget.Rente(50000d, -1013.82d, 60);
+            Assert.AreEqual(Math.Round(0.08d/12,5), Math.Round(rente,5),  "Rente");
+            }
+
+
+
 
 
     }
