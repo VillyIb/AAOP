@@ -74,31 +74,13 @@ namespace eu.iamia.AAOP.CalculationEngine.CalculationV1
         }
 
 
-        protected internal int RateCalculationPrecision { get; set; }
-
-
-
-
-        /*
-         * 
-         *   apr = ((loanamount + extracost) * rate * Math.Pow((1 + rate), duration)) / (Math.Pow((1 + rate),duration) - 1);
-         * */
-
-        protected internal virtual void ZCalculateAAOP()
-        {
-            // see:https://ungdomsbyen.dk/wp-content/uploads/2017/03/udregning-af-acc8aop-1.pdf
-
-            var bruttoPayment = LoanSettings.Lånebeøb + LoanSettings.Startomkostning;
-
-            var years = LoanSettings.Løbetid / 12;
-
-            var aaop = LoanSettings.Startomkostning / LoanSettings.Løbetid / years - 1m;
-
-            LoanCalculations.ÅOP = decimal.Round(aaop, 5);
-
-        }
-
-
+        /// <summary>
+        /// Very simple alternative to using Microsoft.VisualBasic.Financial.Rate(nper, pmt, pv); 
+        /// </summary>
+        /// <param name="hovedstol"></param>
+        /// <param name="afdrag"></param>
+        /// <param name="perioder"></param>
+        /// <returns></returns>
         protected internal double Rente(double hovedstol, double afdrag, int perioder)
         {
             var error = Math.Pow(10, -5);
@@ -124,10 +106,10 @@ namespace eu.iamia.AAOP.CalculationEngine.CalculationV1
             }
 
             return value;
-
         }
 
 
+        // Tools to check calculation.
         // https://erhv-oekon-akademi.hansreitzel.dk/elementer/dokument/skabelon-tiler-beregning-af-aaop-og-amortiseringstabel/model-aaop-annuitetslaan-flere-terminer.aspx
         // http://www.laaneberegner.nu/beregner.asp
 
