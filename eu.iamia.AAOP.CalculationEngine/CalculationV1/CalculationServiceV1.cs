@@ -45,7 +45,7 @@ namespace eu.iamia.AAOP.CalculationEngine.CalculationV1
             var loanAmount = (double)LoanSettings.Lånebeøb;
             var numberOfPayments = LoanSettings.Løbetid;
 
-            var paymentAmount = (rateOfInterest * loanAmount) / (1 - Math.Pow(1 + rateOfInterest, numberOfPayments * -1));
+            var paymentAmount = rateOfInterest * loanAmount / (1 - Math.Pow(1 + rateOfInterest, numberOfPayments * -1));
 
             Console.WriteLine("RateOfInterest: {0}", rateOfInterest);
             Console.WriteLine("LoanAmount: {0}", loanAmount);
@@ -89,7 +89,7 @@ namespace eu.iamia.AAOP.CalculationEngine.CalculationV1
             Console.WriteLine("Hovedstol: {0}, Afdrag: {1}, Perioder: {2}", hovedstol, afdrag, perioder);
             Console.WriteLine("Start {0}, Error: {1}", error, start);
 
-            double value = start;
+            var value = start;
             for (var loop = 100; loop >= 0; loop--)
             {
                 value = start;
@@ -101,7 +101,7 @@ namespace eu.iamia.AAOP.CalculationEngine.CalculationV1
                     break;
                 }
 
-                start = start - afvigelse *.00001;
+                start = start - afvigelse * .00001;
 
             }
 
@@ -117,17 +117,63 @@ namespace eu.iamia.AAOP.CalculationEngine.CalculationV1
         {
             var nper = (double)LoanSettings.Løbetid;
             var pmt = -(double)LoanCalculations.Ydelse;
-            var pv = (double)(LoanSettings.Lånebeøb - LoanSettings.Startomkostning );
+            var pv = (double)(LoanSettings.Lånebeøb - LoanSettings.Startomkostning);
 
-            Console.WriteLine("Nper:{0} Pmt:{1} Pv:{2} ",nper, pmt, pv);
+            Console.WriteLine("Nper:{0} Pmt:{1} Pv:{2} ", nper, pmt, pv);
 
-            var rate = Microsoft.VisualBasic.Financial.Rate(nper, pmt, pv);
+            var rate = Financial.Rate(nper, pmt, pv);
             Console.WriteLine("MonthlyRate: {0}", rate);
 
             var apr = Math.Pow(1 + rate, 12) - 1;
 
             LoanCalculations.ÅOP = Decimal.Round((decimal)apr, 5);
+        }
 
+
+        protected internal virtual void LoadPaymentPlan()
+        {
+            var paymentPlan = new PaymentPlan();
+
+            var ydelse = decimal.Round(LoanCalculations.Ydelse, 2);
+            var mdRente = LoanSettings.PålydendeRente / 12m;
+
+            var current = new PaymentDetail
+            {
+                Ydelse = ydelse
+                               , Rente = 0m
+                               , Afdrag = 0m
+                               , Nummer = 0
+                               , PrimoVærdi = 0m
+                               , UltimoVærdi = LoanSettings.Lånebeøb
+            };
+
+            for (var termin = 0; termin < LoanSettings.Løbetid; termin++)
+            {
+                var last = current;
+
+                var rente = decimal.Round(last.UltimoVærdi * mdRente, 2);
+                var afdrag = decimal.Round(LoanCalculations.Ydelse - rente, 2);
+
+                current = new PaymentDetail
+                {
+                    Ydelse = ydelse
+                           , Rente = rente
+                           , Afdrag = afdrag
+                           , Nummer = termin + 1
+                           , PrimoVærdi = last.UltimoVærdi
+                           , UltimoVærdi = last.UltimoVærdi - afdrag
+                };
+
+                paymentPlan.PaymentDetailList.Add(current);
+            }
+
+            // Adjust last for minor roundings.
+            // ReSharper disable once PossibleNullReferenceException
+            current.Afdrag = current.PrimoVærdi;
+            current.Ydelse = current.Afdrag + current.Rente;
+            current.UltimoVærdi = 0m;
+
+            PaymentPlan = paymentPlan;
         }
 
 
@@ -136,7 +182,8 @@ namespace eu.iamia.AAOP.CalculationEngine.CalculationV1
 
             CalculateYdelse();
             CalculateDebitorRente();
-            this.CalculateAAOP();
+            CalculateAAOP();
+            LoadPaymentPlan();
         }
 
 

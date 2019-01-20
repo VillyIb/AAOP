@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F29184E2-2DFC-4653-9535-023BFBE75AB2}</ProjectGuid>
+    <ProjectGuid>{AED5F9E0-3D71-44CF-8887-6CE031E1E35B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eu.iamia.AAOP.CalculationEngine.Test</RootNamespace>
-    <AssemblyName>eu.iamia.AAOP.CalculationEngine.Test</AssemblyName>
+    <RootNamespace>eu.iamia.AAOP.RepositoryFile.Test</RootNamespace>
+    <AssemblyName>eu.iamia.AAOP.RepositoryFile.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -48,11 +48,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculationServiceV1_UnitTest\CalculateLoan.cs" />
+    <Compile Include="RepositoryFile_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -60,17 +59,13 @@
       <Project>{9ab50801-4192-45b5-a173-28056e4c929e}</Project>
       <Name>eu.iamia.AAOP.CalculationEngine</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eu.iamia.AAOP.ExcelExport\eu.iamia.AAOP.ExcelExport.csproj">
-      <Project>{086c42c6-2629-4b85-91d2-ef21e0f4d5ae}</Project>
-      <Name>eu.iamia.AAOP.ExcelExport</Name>
-    </ProjectReference>
     <ProjectReference Include="..\eu.iamia.AAOP.ISP\eu.iamia.AAOP.ISP.csproj">
       <Project>{76020d4d-d2ec-4300-a663-0289287fc5e7}</Project>
       <Name>eu.iamia.AAOP.ISP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eu.iamia.Util\eu.iamia.Util.csproj">
-      <Project>{ebc81ab0-f5a6-4210-84a4-2973886584af}</Project>
-      <Name>eu.iamia.Util</Name>
+    <ProjectReference Include="..\eu.iamia.AAOP.RepositoryFile\eu.iamia.AAOP.RepositoryFile.csproj">
+      <Project>{ef9fe13f-433d-41ec-b65c-c5a61e607e5b}</Project>
+      <Name>eu.iamia.AAOP.RepositoryFile</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

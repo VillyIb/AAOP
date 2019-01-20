@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace eu.iamia.AAOP.CalculationEngine.Models
+﻿namespace eu.iamia.AAOP.CalculationEngine.Models
 {
     using eu.iamia.AAOP.ISP.Models;
     public class LoanSettings : ILoanSettings

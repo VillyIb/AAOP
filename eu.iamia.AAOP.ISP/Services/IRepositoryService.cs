@@ -19,7 +19,7 @@ namespace eu.iamia.AAOP.ISP.Services
         /// </summary>
         /// <param name="loan"></param>
         /// <param name="loanStorageMetadata"></param>
-        void Read(out ILoanStorage loan, ILoanStorageMetadata loanStorageMetadata);
+        void Read(out ILoanSettings loan, ILoanStorageMetadata loanStorageMetadata);
 
 
         /// <summary>

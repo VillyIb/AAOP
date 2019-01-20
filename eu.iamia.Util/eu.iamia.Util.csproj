@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9AB50801-4192-45B5-A173-28056E4C929E}</ProjectGuid>
+    <ProjectGuid>{EBC81AB0-F5A6-4210-84A4-2973886584AF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>eu.iamia.AAOP.CalculationEngine</RootNamespace>
-    <AssemblyName>eu.iamia.AAOP.CalculationEngine</AssemblyName>
+    <RootNamespace>eu.iamia.Util</RootNamespace>
+    <AssemblyName>eu.iamia.Util</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,7 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,21 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculationV1\CalculationServiceV1.cs" />
-    <Compile Include="Models\LoanCalculations.cs" />
-    <Compile Include="Models\LoanSettings.cs" />
-    <Compile Include="Models\PaymentPlan.cs" />
+    <Compile Include="ExcelConverterV2.cs" />
+    <Compile Include="ExcelFormatAttribute.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\TypeExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\eu.iamia.AAOP.ISP\eu.iamia.AAOP.ISP.csproj">
-      <Project>{76020d4d-d2ec-4300-a663-0289287fc5e7}</Project>
-      <Name>eu.iamia.AAOP.ISP</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\eu.iamia.Util\eu.iamia.Util.csproj">
-      <Project>{ebc81ab0-f5a6-4210-84a4-2973886584af}</Project>
-      <Name>eu.iamia.Util</Name>
-    </ProjectReference>
+    <Compile Include="SystemDateTime.cs" />
+    <Compile Include="XmlUtils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Text;
-using System.Collections.Generic;
+using System.Linq;
+
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 // ReSharper disable InconsistentNaming
 
 namespace eu.iamia.AAOP.CalculationEngine.Test.CalculationServiceV1_UnitTest
 {
-    using eu.iamia.AAOP.CalculationEngine.CalculationV1;
-    using eu.iamia.AAOP.CalculationEngine.Models;
+    using System.IO;
+
+    using CalculationV1;
+    using Models;
+    using ExcelExport;
     using eu.iamia.AAOP.ISP.Models;
+    using ISP.Services;
+    using Util;
 
     /// <summary>
     /// Summary description for CalculateLoan
@@ -63,15 +69,15 @@ namespace eu.iamia.AAOP.CalculationEngine.Test.CalculationServiceV1_UnitTest
         [TestInitialize()]
         public void MyTestInitialize()
         {
-            TestTarget  = new CalculationServiceV1();
+            TestTarget = new CalculationServiceV1();
 
             LoanSettings = new LoanSettings
-                               {
-                                   Lånebeøb = 50000m,
-                                   Løbetid = 5 * 12,
-                                   PålydendeRente = 0.08m,
-                                   Startomkostning = 500m
-                               };
+            {
+                Lånebeøb = 50000m,
+                Løbetid = 5 * 12,
+                PålydendeRente = 0.08m,
+                Startomkostning = 500m
+            };
 
             ExpectedValue = new LoanCalculations { ÅOP = 0.08760m, Ydelse = 1013.82m, DebitorRente = 0.083m };
         }
@@ -128,18 +134,75 @@ namespace eu.iamia.AAOP.CalculationEngine.Test.CalculationServiceV1_UnitTest
         }
 
 
-       
+
         [TestMethod]
         public void CalculateLoan_Rente()
         {
 
             var rente = TestTarget.Rente(50000d, -1013.82d, 60);
-            Assert.AreEqual(Math.Round(0.08d/12,5), Math.Round(rente,5),  "Rente");
+            Assert.AreEqual(Math.Round(0.08d / 12, 5), Math.Round(rente, 5), "Rente");
+        }
+
+        [TestMethod]
+        public void CalculateLoan_MainTest()
+        {
+            var testTarget = TestTarget as IAAOPCalculationService;
+
+            testTarget.Init(LoanSettings);
+            testTarget.CalculateLoan();
+
+            Assert.AreEqual(ExpectedValue.ÅOP, TestTarget.LoanCalculations.ÅOP, "ÅOP");
+        }
+
+
+        [TestMethod]
+        public void CalculateLoan_PaymentPlan()
+        {
+            var testTarget = TestTarget as IAAOPCalculationService;
+
+            testTarget.Init(LoanSettings);
+            testTarget.CalculateLoan();
+
+
+            var ppl = testTarget.PaymentPlan.PaymentDetailList.ToList();
+
+            var toskip = ppl.Count - 3;
+
+            var pps = ppl.Take(3).Union(ppl.Skip(toskip).Take(3));
+
+            foreach (var row in pps)
+            {
+                Console.WriteLine("{0}", row.SerializeToXml());
             }
 
+            Assert.AreEqual(ExpectedValue.ÅOP, TestTarget.LoanCalculations.ÅOP, "ÅOP");
+        }
 
 
 
+        [TestMethod]
+        public void CalculateLoan_Export()
+        {
+            var testTarget = TestTarget as IAAOPCalculationService;
+
+            testTarget.Init(LoanSettings);
+            testTarget.CalculateLoan();
+
+            // ATTENTION - HARDCODED path - directory MUST exist.
+
+            var filename = @"C:\Development\FinancialCalculator\ExportData\Annuitet.xml";
+
+            var fi = new FileInfo(filename);
+            var fs = fi.OpenWrite();
+
+            var converter = new WebExportToExcel();
+            converter.Init();
+
+            using (var sw = new StreamWriter(fs, new UTF8Encoding(false)))
+            {
+                converter.Convert(sw, testTarget.PaymentPlan.PaymentDetailList);
+            }
+        }
 
     }
 }

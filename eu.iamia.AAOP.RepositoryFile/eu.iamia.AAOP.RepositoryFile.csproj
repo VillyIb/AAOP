@@ -41,12 +41,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileRepository\FileRepositoryService.cs" />
+    <Compile Include="FileRepository\LoanStorage.cs" />
+    <Compile Include="FileRepository\LoanStorageMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\eu.iamia.AAOP.CalculationEngine\eu.iamia.AAOP.CalculationEngine.csproj">
+      <Project>{9ab50801-4192-45b5-a173-28056e4c929e}</Project>
+      <Name>eu.iamia.AAOP.CalculationEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eu.iamia.AAOP.ISP\eu.iamia.AAOP.ISP.csproj">
       <Project>{76020d4d-d2ec-4300-a663-0289287fc5e7}</Project>
       <Name>eu.iamia.AAOP.ISP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eu.iamia.Util\eu.iamia.Util.csproj">
+      <Project>{ebc81ab0-f5a6-4210-84a4-2973886584af}</Project>
+      <Name>eu.iamia.Util</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
