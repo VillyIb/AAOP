@@ -65,10 +65,47 @@
                         <td>
                             <asp:Label runat="server" ID="XuAAOP"></asp:Label></td>
                     </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <asp:LinkButton runat="server" ID="XuExport" OnClick="XuExport_Click">Hent betalingsforløb</asp:LinkButton></td>
+                    </tr>
+
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Arkiv</th>
+                    </tr>
+
+                    <tr>
+                        <td>Filnavn (uden extension)</td>
+                        <td>
+                            <asp:TextBox runat="server" ID="XuFilename"></asp:TextBox></td>
+                    </tr>
+
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <asp:LinkButton runat="server" ID="XuSave" OnClick="XuSave_Click">Gem låneberegning</asp:LinkButton></td>
+                    </tr>
+
+                    <tr>
+                        <td>Låneberegninger</td>
+                        <td>
+                            <asp:DropDownList runat="server" ID="XuArchiveList" OnSelectedIndexChanged="XuArchiveList_SelectedIndexChanged" AutoPostBack="True" /></td>
+                    </tr>
+
                 </tbody>
             </table>
 
         </div>
+
     </form>
 </body>
 </html>
